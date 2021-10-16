@@ -1,11 +1,11 @@
 name: Docker
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   docker:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       
@@ -16,5 +16,5 @@ jobs:
             --pull \
             --tag "$image"
           
-          docker login -u msrd0 -p "${{ secrets.GHCR_TOKEN }}" ghcr.io
+          docker login -u msrd0 -p "${{secrets.GITHUB_TOKEN}}" ghcr.io
           docker push "$image"
